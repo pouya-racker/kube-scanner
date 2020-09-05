@@ -37,12 +37,10 @@ spec:
       containers:
       - name: kube-scanner
         imagePullPolicy: Always
-        image: bitnami/kubectl
+        image: poopool/kube-scanner
         env:
         - name: SCAN_INTERVAL
           value: 120
         - name: API_KEY
-          value: dxcMus8FQJA3YTn9uBtZjfMS3OZJQknp
-        command: ["sleep"]
-        args: ["300"]
+          value: Dummy_key # Replace me
 ...

@@ -37,7 +37,7 @@ spec:
       containers:
       - name: kube-scanner
         imagePullPolicy: Always
-        image: poopool/kube-scanner
+        image: poopool/kube-scanner:latest
         env:
         - name: SCAN_INTERVAL
           value: 120

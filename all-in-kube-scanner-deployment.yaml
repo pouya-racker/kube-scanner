@@ -1,0 +1,48 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: kube-scanner-sa
+...
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: kube-scanner-rb
+subjects:
+- kind: ServiceAccount
+  name: kube-scanner-sa
+  namespace: default
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+...
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-scanner
+spec:
+  selector:
+    matchLabels:
+      app: kube-scanner
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: kube-scanner
+    spec:
+      serviceAccountName: kube-scanner-sa
+      containers:
+      - name: kube-scanner
+        imagePullPolicy: Always
+        image: bitnami/kubectl
+        env:
+        - name: SCAN_INTERVAL
+          value: 120
+        - name: API_KEY
+          value: dxcMus8FQJA3YTn9uBtZjfMS3OZJQknp
+        command: ["sleep"]
+        args: ["300"]
+...

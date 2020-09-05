@@ -1,0 +1,8 @@
+{
+	"apikey": "$API_KEY",
+	"timestamp": "$TIMESTAMP",
+	"inventory": {
+		"items": [
+		]
+	}
+}

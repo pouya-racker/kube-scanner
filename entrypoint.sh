@@ -37,15 +37,16 @@ do
   do
     echo "Processing $file into JSON array"
     sleep 1
-    jq -s '{"apikey": "'$API_KEY'", "timestamp": "'$TIME_STAMP'", inventory: {items: . }}' sample-json/*.json > inventory.json
+    jq -s '{"apikey": "'$API_KEY'", "timestamp": "'$TIME_STAMP'", inventory: {items: . }}' /kubescanner/scan_$TIME_STAMP/*.json > /kubescanner/scan_$TIME_STAMP/inventory.json
   done
 
   # Posting inventory.json to API end-point with API_KEY auth
   echo "Posting to the API endpoint"
   sleep 1
-#  curl -v -H @{'apikey' = "$API_KEY"} $API_ENDPOINT -d @inventory.json --header "Content-Type: application/json"
+#  curl -v -H @{'apikey' = "$API_KEY"} $API_ENDPOINT -d @/kubescanner/scan_$TIME_STAMP/inventory.json --header "Content-Type: application/json"
 
   echo "Going to sleep till next scan"
+  echo
   sleep 1
 
 done

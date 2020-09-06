@@ -40,7 +40,7 @@ spec:
         image: poopool/kube-scanner:latest
         env:
         - name: SCAN_INTERVAL
-          value: 120
+          value: '120'
         - name: API_KEY
-          value: Dummy_key # Replace me
+          value: 'Dummy_key' # Replace me
 ...

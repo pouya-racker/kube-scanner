@@ -46,6 +46,7 @@ do
 #  curl -v -H @{'apikey' = "$API_KEY"} $API_ENDPOINT -d @/kubescanner/scan_$TIME_STAMP/inventory.json --header "Content-Type: application/json"
 
   echo "Going to sleep till next scan"
+  echo
   sleep 1
 
 done

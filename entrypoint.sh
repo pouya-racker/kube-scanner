@@ -10,8 +10,8 @@ do
   echo "Scanning interval: $SCAN_INTERVAL"
   sleep "$SCAN_INTERVAL"
 
-  # Log all scanned resources in a folder based on timestamp
-  TIME_STAMP=$(date +%Y-%m-%d_%H-%M-%S)
+  # Log all scanned resources in a folder based on timestamp(epoch time)
+  TIME_STAMP=$(date +%s)
   echo "Scanning timestamp: $TIME_STAMP"
   mkdir -p /kubescanner/scan_$TIME_STAMP
 
@@ -37,7 +37,7 @@ do
   do
     echo "Processing $file into JSON array"
     sleep 1
-    jq -s '{"apikey": "'$API_KEY'", "timestamp": "'$TIME_STAMP'", inventory: {items: . }}' /kubescanner/scan_$TIME_STAMP/*.json > /kubescanner/scan_$TIME_STAMP/inventory.json
+    jq -s '{"time": "'$TIME_STAMP'", inventory: {resources: . }}' /kubescanner/scan_$TIME_STAMP/*.json > /kubescanner/scan_$TIME_STAMP/inventory.json
   done
 
   # Posting inventory.json to API end-point with API_KEY auth

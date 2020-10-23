@@ -44,7 +44,7 @@ spec:
         - name: SCAN_INTERVAL
           value: '120'
         - name: API_ENDPOINT
-            value: 'URL' # Replace me
+          value: 'URL' # Replace me
         - name: API_KEY
           value: 'Dummy_key' # Replace me
 ...

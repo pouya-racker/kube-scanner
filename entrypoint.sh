@@ -44,7 +44,7 @@ do
   echo "Posting to the API endpoint"
   sleep 1
 
-  curl --location --request POST $API_ENDPOINT --header 'x-access-token: $API_KEY' --header 'Content-Type: application/json' -d @inventory.json
+  curl --location --request POST $API_ENDPOINT --header 'x-access-token: $API_KEY' --header 'Content-Type: application/json' -d @/kubescanner/scan_$TIME_STAMP/inventory.json
 
   echo "Going to sleep till next scan"
   echo

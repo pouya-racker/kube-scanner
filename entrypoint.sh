@@ -37,7 +37,7 @@ do
   do
     echo "Processing $file into JSON array"
     sleep 1
-    jq -s '{ "data": [{ "timestamp": "'$TIME_STAMP'", inventory: { items: . }}] }' sample-json/*.json > inventory.json
+    jq -s '{ "data": [{ "timestamp": "'$TIME_STAMP'", inventory: { items: . }}] }' /kubescanner/scan_$TIME_STAMP/*.json > /kubescanner/scan_$TIME_STAMP/inventory.json
   done
 
   # Posting inventory.json to API end-point with API_KEY auth

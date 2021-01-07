@@ -44,7 +44,7 @@ spec:
         - name: SCAN_INTERVAL
           value: '60'
         - name: API_ENDPOINT
-          value: '' # Replace me
+          value: 'http://mrapi-alb-922745486.us-west-2.elb.amazonaws.com:5000/push_data' # Replace me
         - name: API_KEY
           value: '' # Replace me
 ...

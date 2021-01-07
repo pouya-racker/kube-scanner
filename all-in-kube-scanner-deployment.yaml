@@ -42,9 +42,9 @@ spec:
         image: poopool/kube-scanner:develop
         env:
         - name: SCAN_INTERVAL
-          value: '120'
+          value: '60'
         - name: API_ENDPOINT
-          value: 'URL' # Replace me
+          value: '' # Replace me
         - name: API_KEY
-          value: 'Dummy_key' # Replace me
+          value: '' # Replace me
 ...

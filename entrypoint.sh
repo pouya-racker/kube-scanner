@@ -46,7 +46,7 @@ do
         for item in $(kubectl get "$resource" -n "$NS_NAME" 2>&1 | tail -n +2 | awk '{print $1}')
         do
             echo "exporting item '${item}'"
-            kubectl -n "$NS_NAME" apply view-last-applied "$resource" "$item" -o json > /kubescanner/scan_$"TIME_STAMP"/$"NS_NAME".json
+            kubectl -n "$NS_NAME" apply view-last-applied "$resource" "$item" -o json > /kubescanner/scan_"$TIME_STAMP"/"$NS_NAME".json
         done
     done
 
@@ -64,7 +64,7 @@ do
   sleep 1
 
   CURL_CMD="curl --location --request POST $API_ENDPOINT --header 'x-access-token: $API_KEY' --header 'Content-Type: application/json' -d @/kubescanner/scan_$TIME_STAMP/inventory.json"
-  eval $"CURL_CMD"
+  eval "$CURL_CMD"
 
   echo "Going to sleep till next scan"
   echo

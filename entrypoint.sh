@@ -46,7 +46,7 @@ do
         for item in $(kubectl get "$resource" -n "$NS_NAME" 2>&1 | tail -n +2 | awk '{print $1}')
         do
             echo "exporting item '${item}'"
-            kubectl -n "$NS_NAME" apply view-last-applied "$resource" "$item" -o json > /kubescanner/scan_"$TIME_STAMP"/"$item".json
+            kubectl -n "$NS_NAME" apply view-last-applied "$resource" "$item" -o json > /kubescanner/scan_"$TIME_STAMP"/"$resource"_"$item".json
         done
     done
 

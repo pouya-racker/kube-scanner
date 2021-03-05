@@ -1,8 +1,20 @@
 #!/usr/bin/env bash
 
+# List of resources that will be scanned
+RESOURCE=(
+  deployment
+  service
+  ingress
+  pod
+)
+
+# Set scanning interval, defaulting to 300 if SCAN_INTERVAL env var is not passed in
 SCAN_INTERVAL="${SCAN_INTERVAL:-300}"
+
+# Set API_Key acting as auth token with portal
 API_KEY="${API_KEY}"
 
+# Looping through namespaces and scanning resources
 while true
 do
 
@@ -16,7 +28,7 @@ do
   mkdir -p /kubescanner/scan_$TIME_STAMP
 
   # Dump all resources per namespace in json format
-  for NS_NAME in `kubectl get ns -o=jsonpath='{.items[*].metadata.name}'`
+  for NS_NAME in $(kubectl get ns -o=jsonpath='{.items[*].metadata.name}')
   do
 
     # Skipping kube-system and other system namespace
@@ -25,11 +37,18 @@ do
       continue
     fi
 
-    echo "Scanning $NS_NAME namespace..."
+    echo "scanning namespace '${NS_NAME}'"
     sleep 1
-    echo "Dumping all resources in $NS_NAME namespace"
-    sleep 1
-    kubectl -n $NS_NAME get all -o json > /kubescanner/scan_$TIME_STAMP/$NS_NAME.json
+
+    for resource in "${RESOURCE[@]}"
+    do
+        echo "scanning resource '${resource}'"
+        for item in $(kubectl get "$resource" -n "$NS_NAME" 2>&1 | tail -n +2 | awk '{print $1}')
+        do
+            echo "exporting item '${item}'"
+            kubectl -n "$NS_NAME" apply view-last-applied "$resource" "$item" -o json > /kubescanner/scan_$"TIME_STAMP"/$"NS_NAME".json
+        done
+    done
 
   done
 
@@ -45,7 +64,7 @@ do
   sleep 1
 
   CURL_CMD="curl --location --request POST $API_ENDPOINT --header 'x-access-token: $API_KEY' --header 'Content-Type: application/json' -d @/kubescanner/scan_$TIME_STAMP/inventory.json"
-  eval $CURL_CMD
+  eval $"CURL_CMD"
 
   echo "Going to sleep till next scan"
   echo

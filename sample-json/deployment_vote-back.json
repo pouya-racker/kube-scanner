@@ -1,0 +1,44 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "annotations": {},
+    "name": "vote-back",
+    "namespace": "default"
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "matchLabels": {
+        "app": "vote-back"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "vote-back"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "env": [
+              {
+                "name": "ALLOW_EMPTY_PASSWORD",
+                "value": "yes"
+              }
+            ],
+            "image": "mcr.microsoft.com/oss/bitnami/redis:6.0.8",
+            "name": "vote-back",
+            "ports": [
+              {
+                "containerPort": 6379,
+                "name": "redis"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "annotations": {},
+    "labels": {
+      "app": "hello"
+    },
+    "name": "helloweb",
+    "namespace": "web-app"
+  },
+  "spec": {
+    "selector": {
+      "matchLabels": {
+        "app": "hello",
+        "tier": "web"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "hello",
+          "tier": "web"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "image": "gcr.io/google-samples/hello-app:1.0",
+            "name": "hello-app",
+            "ports": [
+              {
+                "containerPort": 8080
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

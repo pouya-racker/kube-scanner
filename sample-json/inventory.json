@@ -1,180 +1,242 @@
 {
-  "data": [
-    {
-      "timestamp": "1603472780",
-      "inventory": {
-        "items": [
-          {
-            "apiVersion": "v1",
-            "items": [
-              {
-                "apiVersion": "v1",
-                "kind": "Pod",
-                "metadata": {
-                  "annotations": {
-                    "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Pod\",\"metadata\":{\"annotations\":{},\"name\":\"nginx\",\"namespace\":\"default\"},\"spec\":{\"containers\":[{\"image\":\"nginx\",\"name\":\"nginx\"}]}}\n",
-                    "kubernetes.io/limit-ranger": "LimitRanger plugin set: cpu request for container nginx"
-                  },
-                  "creationTimestamp": "2020-10-23T16:26:17Z",
-                  "name": "nginx",
-                  "namespace": "default",
-                  "resourceVersion": "7831",
-                  "selfLink": "/api/v1/namespaces/default/pods/nginx",
-                  "uid": "1a114555-db14-44bd-91f0-e2ab957ac22c"
-                },
-                "spec": {
-                  "containers": [
-                    {
-                      "image": "nginx",
-                      "imagePullPolicy": "Always",
-                      "name": "nginx",
-                      "resources": {
-                        "requests": {
-                          "cpu": "100m"
-                        }
-                      },
-                      "terminationMessagePath": "/dev/termination-log",
-                      "terminationMessagePolicy": "File",
-                      "volumeMounts": [
-                        {
-                          "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
-                          "name": "default-token-t2fj4",
-                          "readOnly": true
-                        }
-                      ]
-                    }
-                  ],
-                  "dnsPolicy": "ClusterFirst",
-                  "enableServiceLinks": true,
-                  "nodeName": "gke-cluster-1-default-pool-45b46c1c-s9jl",
-                  "priority": 0,
-                  "restartPolicy": "Always",
-                  "schedulerName": "default-scheduler",
-                  "securityContext": {},
-                  "serviceAccount": "default",
-                  "serviceAccountName": "default",
-                  "terminationGracePeriodSeconds": 30,
-                  "tolerations": [
-                    {
-                      "effect": "NoExecute",
-                      "key": "node.kubernetes.io/not-ready",
-                      "operator": "Exists",
-                      "tolerationSeconds": 300
-                    },
-                    {
-                      "effect": "NoExecute",
-                      "key": "node.kubernetes.io/unreachable",
-                      "operator": "Exists",
-                      "tolerationSeconds": 300
-                    }
-                  ],
-                  "volumes": [
-                    {
-                      "name": "default-token-t2fj4",
-                      "secret": {
-                        "defaultMode": 420,
-                        "secretName": "default-token-t2fj4"
-                      }
-                    }
-                  ]
-                },
-                "status": {
-                  "conditions": [
-                    {
-                      "lastProbeTime": null,
-                      "lastTransitionTime": "2020-10-23T16:26:17Z",
-                      "status": "True",
-                      "type": "Initialized"
-                    },
-                    {
-                      "lastProbeTime": null,
-                      "lastTransitionTime": "2020-10-23T16:26:24Z",
-                      "status": "True",
-                      "type": "Ready"
-                    },
-                    {
-                      "lastProbeTime": null,
-                      "lastTransitionTime": "2020-10-23T16:26:24Z",
-                      "status": "True",
-                      "type": "ContainersReady"
-                    },
-                    {
-                      "lastProbeTime": null,
-                      "lastTransitionTime": "2020-10-23T16:26:17Z",
-                      "status": "True",
-                      "type": "PodScheduled"
-                    }
-                  ],
-                  "containerStatuses": [
-                    {
-                      "containerID": "docker://a6259b308af48bd2101d7022548955fd6aa1584ab9606a7a9d5bea2eacd55aae",
-                      "image": "nginx:latest",
-                      "imageID": "docker-pullable://nginx@sha256:ed7f815851b5299f616220a63edac69a4cc200e7f536a56e421988da82e44ed8",
-                      "lastState": {},
-                      "name": "nginx",
-                      "ready": true,
-                      "restartCount": 0,
-                      "started": true,
-                      "state": {
-                        "running": {
-                          "startedAt": "2020-10-23T16:26:24Z"
-                        }
-                      }
-                    }
-                  ],
-                  "hostIP": "10.128.0.81",
-                  "phase": "Running",
-                  "podIP": "10.4.0.12",
-                  "podIPs": [
-                    {
-                      "ip": "10.4.0.12"
-                    }
-                  ],
-                  "qosClass": "Burstable",
-                  "startTime": "2020-10-23T16:26:17Z"
+  "data": {
+    "timestamp": 1615055412,
+    "Description": "K8S scanning agent",
+    "inventory": {
+      "items": [
+        {
+          "apiVersion": "apps/v1",
+          "kind": "Deployment",
+          "metadata": {
+            "annotations": {},
+            "labels": {
+              "app": "hello"
+            },
+            "name": "helloweb",
+            "namespace": "web-app"
+          },
+          "spec": {
+            "selector": {
+              "matchLabels": {
+                "app": "hello",
+                "tier": "web"
+              }
+            },
+            "template": {
+              "metadata": {
+                "labels": {
+                  "app": "hello",
+                  "tier": "web"
                 }
               },
-              {
-                "apiVersion": "v1",
-                "kind": "Service",
-                "metadata": {
-                  "creationTimestamp": "2020-10-23T15:57:27Z",
-                  "labels": {
-                    "component": "apiserver",
-                    "provider": "kubernetes"
-                  },
-                  "name": "kubernetes",
-                  "namespace": "default",
-                  "resourceVersion": "144",
-                  "selfLink": "/api/v1/namespaces/default/services/kubernetes",
-                  "uid": "a6a40e30-4f1c-4373-a73b-22f7af8d39d1"
-                },
-                "spec": {
-                  "clusterIP": "10.8.0.1",
-                  "ports": [
-                    {
-                      "name": "https",
-                      "port": 443,
-                      "protocol": "TCP",
-                      "targetPort": 443
-                    }
-                  ],
-                  "sessionAffinity": "None",
-                  "type": "ClusterIP"
-                },
-                "status": {
-                  "loadBalancer": {}
-                }
+              "spec": {
+                "containers": [
+                  {
+                    "image": "gcr.io/google-samples/hello-app:1.0",
+                    "name": "hello-app",
+                    "ports": [
+                      {
+                        "containerPort": 8080
+                      }
+                    ]
+                  }
+                ]
               }
-            ],
-            "kind": "List",
-            "metadata": {
-              "resourceVersion": "",
-              "selfLink": ""
             }
           }
-        ]
-      }
+        },
+        {
+          "apiVersion": "apps/v1",
+          "kind": "Deployment",
+          "metadata": {
+            "annotations": {},
+            "name": "vote-back",
+            "namespace": "default"
+          },
+          "spec": {
+            "replicas": 1,
+            "selector": {
+              "matchLabels": {
+                "app": "vote-back"
+              }
+            },
+            "template": {
+              "metadata": {
+                "labels": {
+                  "app": "vote-back"
+                }
+              },
+              "spec": {
+                "containers": [
+                  {
+                    "env": [
+                      {
+                        "name": "ALLOW_EMPTY_PASSWORD",
+                        "value": "yes"
+                      }
+                    ],
+                    "image": "mcr.microsoft.com/oss/bitnami/redis:6.0.8",
+                    "name": "vote-back",
+                    "ports": [
+                      {
+                        "containerPort": 6379,
+                        "name": "redis"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "apiVersion": "apps/v1",
+          "kind": "Deployment",
+          "metadata": {
+            "annotations": {},
+            "name": "vote-front",
+            "namespace": "default"
+          },
+          "spec": {
+            "minReadySeconds": 5,
+            "replicas": 1,
+            "selector": {
+              "matchLabels": {
+                "app": "vote-front"
+              }
+            },
+            "strategy": {
+              "rollingUpdate": {
+                "maxSurge": 1,
+                "maxUnavailable": 1
+              }
+            },
+            "template": {
+              "metadata": {
+                "labels": {
+                  "app": "vote-front"
+                }
+              },
+              "spec": {
+                "containers": [
+                  {
+                    "env": [
+                      {
+                        "name": "REDIS",
+                        "value": "vote-back"
+                      }
+                    ],
+                    "image": "mcr.microsoft.com/azuredocs/azure-vote-front:v1",
+                    "name": "vote-front",
+                    "ports": [
+                      {
+                        "containerPort": 80
+                      }
+                    ],
+                    "resources": {
+                      "limits": {
+                        "cpu": "500m"
+                      },
+                      "requests": {
+                        "cpu": "250m"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "apiVersion": "v1",
+          "kind": "Pod",
+          "metadata": {
+            "annotations": {},
+            "labels": {
+              "app": "web"
+            },
+            "name": "nginx",
+            "namespace": "default"
+          },
+          "spec": {
+            "containers": [
+              {
+                "image": "nginx",
+                "name": "nginx",
+                "ports": [
+                  {
+                    "containerPort": 80
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "apiVersion": "v1",
+          "kind": "Service",
+          "metadata": {
+            "annotations": {},
+            "labels": {
+              "app": "hello"
+            },
+            "name": "helloweb",
+            "namespace": "web-app"
+          },
+          "spec": {
+            "ports": [
+              {
+                "port": 80,
+                "targetPort": 8080
+              }
+            ],
+            "selector": {
+              "app": "hello",
+              "tier": "web"
+            },
+            "type": "LoadBalancer"
+          }
+        },
+        {
+          "apiVersion": "v1",
+          "kind": "Service",
+          "metadata": {
+            "annotations": {},
+            "name": "vote-back",
+            "namespace": "default"
+          },
+          "spec": {
+            "ports": [
+              {
+                "port": 6379
+              }
+            ],
+            "selector": {
+              "app": "vote-back"
+            }
+          }
+        },
+        {
+          "apiVersion": "v1",
+          "kind": "Service",
+          "metadata": {
+            "annotations": {},
+            "name": "vote-front",
+            "namespace": "default"
+          },
+          "spec": {
+            "ports": [
+              {
+                "port": 80
+              }
+            ],
+            "selector": {
+              "app": "vote-front"
+            },
+            "type": "LoadBalancer"
+          }
+        }
+      ]
     }
-  ]
+  }
 }
